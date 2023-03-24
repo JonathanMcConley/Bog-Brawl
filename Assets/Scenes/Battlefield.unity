@@ -639,11 +639,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce4ed9701f56f0e4ea0eadd0a4084a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrounded: 1
   isSinking: 0
   jumpHeight: 10
   speed: 10
-  minSinkingVelocity: -0.25
+  minSinkingVelocity: -0.1
+  jumps: 0
 --- !u!60 &1614545022
 PolygonCollider2D:
   m_ObjectHideFlags: 0

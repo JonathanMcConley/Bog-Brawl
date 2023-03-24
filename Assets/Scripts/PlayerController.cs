@@ -15,17 +15,28 @@ public class PlayerController : MonoBehaviour
     public float minSinkingVelocity;
     public int jumps;
     private float jumpResistance;
+    private float yDeathboxMin;
+    private float yDeathboxMax;
+    private float xDeathboxMin;
     void Start()
     {
         rigidBody= GetComponent<Rigidbody2D>();
         isSinking = false;
         jumps = 2;
         jumpResistance = 1;
+        yDeathboxMin = -15;
+        xDeathboxMin = -20;
+        yDeathboxMax = 30;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (gameObject.transform.position.y < yDeathboxMin || gameObject.transform.position.x < xDeathboxMin || gameObject.transform.position.x > -xDeathboxMin || gameObject.transform.position.y > yDeathboxMax)
+        {
+            rigidBody.velocity = Vector2.zero;
+            gameObject.transform.position = new Vector3(0, 0, -0.01f);
+        }
         //If the player is sinking, their gravity is 0.001% of Normal Gravity
         if (isSinking)
         {
