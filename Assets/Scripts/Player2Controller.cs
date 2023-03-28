@@ -36,7 +36,7 @@ public class Player2Controller : MonoBehaviour
             rigidBody.velocity = Vector2.zero;
             gameObject.transform.position = new Vector3(0, 0, -0.01f);
         }
-        //If the player is sinking, their gravity is 0.001% of Normal Gravity
+        //If the player is sinking, their gravity is 0.001% of Normal Gravity and their jump is less effective
         if (isSinking)
         {
             jumpResistance = 0.625f;
@@ -55,11 +55,9 @@ public class Player2Controller : MonoBehaviour
             rigidBody.AddForce(Vector2.up * jumpHeight * jumpResistance, ForceMode2D.Impulse);
             jumps -= 1;
         }
-        //Block with Z for P1, and Numpad 7 for P2
-        //Grab with C for P1, and Numpad 9 for P2
         //Light Attack with Spacebar for P1, and Numpad 4 for P2
         //Heavy Attack with V for P1, and Numpad 5 for P2
-        //Charge Attack while holding B for P1, and Numpad 6 for P2, release to use attack
+        //IMPLEMENT LAST Charge Attack while holding B for P1, and Numpad 6 for P2, release to use attack
         //Move Left/ Right with A and D for P1, and Left and Right Arrowkeys for P2
         if (Input.GetKey(KeyCode.LeftArrow)) {
             transform.Translate(Vector3.left * speed * Time.deltaTime);
@@ -68,8 +66,6 @@ public class Player2Controller : MonoBehaviour
         {
             transform.Translate(Vector3.right* speed * Time.deltaTime);
         }
-        //Tilt Up with W for P1, and Up Arrowkey for P2
-        //Crouch/ Tilt Down with S for P1, and Down Arrowkey for P2
     }
     //Allows Player to jump while they're touching ground, reduces gravity while touching ground
     private void OnTriggerEnter2D(Collider2D collision)
