@@ -5,16 +5,20 @@ using UnityEngine;
 public class Player1Controller : MonoBehaviour
 {
     private Rigidbody2D rigidBody;
-    public bool isSinking;
-    public float jumpHeight;
-    public float speed;
-    private float horizontalInput;
-    public float minSinkingVelocity;
-    public int jumps;
+    private bool isSinking;
+    private float jumpHeight;
+    private float speed;
+    private float minSinkingVelocity;
+    private int jumps;
     private float jumpResistance;
     private float yDeathboxMin;
     private float yDeathboxMax;
     private float xDeathboxMin;
+    public bool isPunching;
+    public bool isKicking;
+    public bool isJumping;
+    public bool isWalking;
+    public bool gotHit;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +29,9 @@ public class Player1Controller : MonoBehaviour
         yDeathboxMin = -15;
         xDeathboxMin = -20;
         yDeathboxMax = 30;
+        speed = 10;
+        jumpHeight = 10;
+        minSinkingVelocity = -0.1f;
     }
 
     // Update is called once per frame
@@ -56,8 +63,15 @@ public class Player1Controller : MonoBehaviour
             jumps -= 1;
         }
         //Light Attack with Spacebar for P1, and Numpad 4 for P2
+        if (Input.GetKeyDown(KeyCode.Space)) 
+        {
+            
+        }
         //Heavy Attack with V for P1, and Numpad 5 for P2
-        //IMPLEMENT LAST Charge Attack while holding B for P1, and Numpad 6 for P2, release to use attack
+        if (Input.GetKeyDown(KeyCode.V)) 
+        {
+        
+        }
         //Move Left/ Right with A and D for P1, and Left and Right Arrowkeys for P2
         if (Input.GetKey(KeyCode.A))
         {
@@ -84,4 +98,8 @@ public class Player1Controller : MonoBehaviour
             isSinking = false;
         }
     }
+
+    //Coroutine for Punching
+    //Coroutine for Kicking
+    //Coroutine for Getting Hit
 }
