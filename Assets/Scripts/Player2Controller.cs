@@ -56,8 +56,15 @@ public class Player2Controller : MonoBehaviour
             jumps -= 1;
         }
         //Light Attack with Spacebar for P1, and Numpad 4 for P2
+        if (Input.GetKeyDown(KeyCode.Keypad4)) 
+        {
+        
+        }
         //Heavy Attack with V for P1, and Numpad 5 for P2
-        //IMPLEMENT LAST Charge Attack while holding B for P1, and Numpad 6 for P2, release to use attack
+        if (Input.GetKeyDown(KeyCode.Keypad5)) 
+        {
+        
+        }
         //Move Left/ Right with A and D for P1, and Left and Right Arrowkeys for P2
         if (Input.GetKey(KeyCode.LeftArrow)) {
             transform.Translate(Vector3.left * speed * Time.deltaTime);
@@ -83,4 +90,8 @@ public class Player2Controller : MonoBehaviour
             isSinking = false;
         }
     }
+
+    //Coroutine for Punching
+    //Coroutine for Kicking
+    //Coroutine for Getting Hit
 }
