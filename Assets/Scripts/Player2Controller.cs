@@ -198,6 +198,9 @@ public class Player2Controller : MonoBehaviour
         animatorController.SetBool("GotHit", true);
         yield return new WaitForSeconds(hitRecoveryTime);
         animatorController.SetBool("GotHit", false);
+        //Fix Knockback bug here
+        yield return new WaitForSeconds(1.5f);
+        rigidBody.velocity = new Vector2(0, rigidBody.velocity.y);
     }
     public int getLivesLeft()
     {
