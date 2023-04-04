@@ -652,9 +652,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   punchAttackPoint: {fileID: 706177761}
   kickAttackPoint: {fileID: 1152461195}
+  opponent: {fileID: 1437297576}
   punchAttackRange: 0.075
   kickAttackRange: 0.5
   hitRecoveryTime: 1
+  punchKnockback: -1
+  kickKnockback: -3
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1559,9 +1562,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   punchAttackPoint: {fileID: 858787679}
   kickAttackPoint: {fileID: 105706033}
+  opponent: {fileID: 464256948}
   punchAttackRange: 0.075
   kickAttackRange: 0.5
   hitRecoveryTime: 1
+  punchKnockback: -1
+  kickKnockback: -3
 --- !u!1 &1888292869
 GameObject:
   m_ObjectHideFlags: 0

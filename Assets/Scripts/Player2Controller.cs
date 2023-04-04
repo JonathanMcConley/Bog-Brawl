@@ -8,6 +8,7 @@ public class Player2Controller : MonoBehaviour
     private Animator animatorController;
     public Transform punchAttackPoint;
     public Transform kickAttackPoint;
+    public Player1Controller opponent;
     public float punchAttackRange;
     public float kickAttackRange;
     private bool isSinking;
@@ -22,6 +23,8 @@ public class Player2Controller : MonoBehaviour
     private float punchTime;
     private float kickTime;
     public float hitRecoveryTime;
+    public float punchKnockback;
+    public float kickKnockback;
     // Start is called before the first frame update
     void Start()
     {
@@ -137,11 +140,15 @@ public class Player2Controller : MonoBehaviour
         Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(punchAttackPoint.position, punchAttackRange);
         foreach (Collider2D hitPlayer in hitPlayers)
         {
-            if (hitPlayer.CompareTag("Player1"))
+            if (hitPlayer.gameObject == opponent.gameObject)
             {
                 //Do damage
                 //Assign knockback based on damage
+                Rigidbody2D opponentHitbox = opponent.GetComponent<Rigidbody2D>();
+                Vector2 hitDirection = new Vector2(punchAttackPoint.position.x - opponentHitbox.position.x, punchAttackPoint.position.y - opponentHitbox.position.y).normalized;
+                opponentHitbox.AddForce(hitDirection * punchKnockback, ForceMode2D.Impulse);
                 //Call their RecoveryFromHitCoroutine
+                StartCoroutine(opponent.RecoveryFromHitCoroutine());
             }
         }
         yield return new WaitForSeconds(punchTime);
@@ -155,11 +162,15 @@ public class Player2Controller : MonoBehaviour
         Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(punchAttackPoint.position, punchAttackRange);
         foreach (Collider2D hitPlayer in hitPlayers)
         {
-            if (hitPlayer.CompareTag("Player1"))
+            if (hitPlayer.gameObject == opponent.gameObject)
             {
                 //Do damage
                 //Assign knockback based on damage
+                Rigidbody2D opponentHitbox = opponent.GetComponent<Rigidbody2D>();
+                Vector2 hitDirection = new Vector2(kickAttackPoint.position.x - opponentHitbox.position.x, kickAttackPoint.position.y - opponentHitbox.position.y).normalized;
+                opponentHitbox.AddForce(hitDirection * kickKnockback, ForceMode2D.Impulse);
                 //Call their RecoveryFromHitCoroutine
+                StartCoroutine(opponent.RecoveryFromHitCoroutine());
             }
         }
         yield return new WaitForSeconds(kickTime);
