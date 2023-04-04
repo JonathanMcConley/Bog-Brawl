@@ -11,8 +11,8 @@ public class Player2Controller : MonoBehaviour
     public Player1Controller opponent;
     public GameObject[] lives;
     private int livesLeft;
-    public float punchAttackRange;
-    public float kickAttackRange;
+    private float punchAttackRange;
+    private float kickAttackRange;
     private bool isSinking;
     private float jumpHeight;
     private float speed;
@@ -24,9 +24,9 @@ public class Player2Controller : MonoBehaviour
     private float xDeathboxMin;
     private float punchTime;
     private float kickTime;
-    public float hitRecoveryTime;
-    public float punchKnockback;
-    public float kickKnockback;
+    private float hitRecoveryTime;
+    private float punchKnockback;
+    private float kickKnockback;
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +44,11 @@ public class Player2Controller : MonoBehaviour
         punchTime = 0.01f;
         kickTime = 0.3325f;
         livesLeft = lives.Length;
+        punchAttackRange = 0.075f;
+        kickAttackRange = 0.5f;
+        hitRecoveryTime = 1;
+        punchKnockback = -1;
+        kickKnockback = -3;
     }
 
     // Update is called once per frame
@@ -170,13 +175,13 @@ public class Player2Controller : MonoBehaviour
     {
         animatorController.SetBool("IsKicking", true);
         //Collision detection by Brackeys
-        Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(punchAttackPoint.position, punchAttackRange);
+        Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(kickAttackPoint.position, kickAttackRange);
         foreach (Collider2D hitPlayer in hitPlayers)
         {
             if (hitPlayer.gameObject == opponent.gameObject)
             {
-                //Do damage
-                //Assign knockback based on damage
+                //Do damage (Not implemented due to time)
+                //Assign knockback(Implemented) based on damage (not implemented due to time)
                 Rigidbody2D opponentHitbox = opponent.GetComponent<Rigidbody2D>();
                 Vector2 hitDirection = new Vector2(kickAttackPoint.position.x - opponentHitbox.position.x, kickAttackPoint.position.y - opponentHitbox.position.y).normalized;
                 opponentHitbox.AddForce(hitDirection * kickKnockback, ForceMode2D.Impulse);
@@ -193,5 +198,9 @@ public class Player2Controller : MonoBehaviour
         animatorController.SetBool("GotHit", true);
         yield return new WaitForSeconds(hitRecoveryTime);
         animatorController.SetBool("GotHit", false);
+    }
+    public int getLivesLeft()
+    {
+        return livesLeft;
     }
 }

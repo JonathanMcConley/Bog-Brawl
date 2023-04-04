@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ManageGame : MonoBehaviour
 {
+    public Player1Controller player1;
+    public Player2Controller player2;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,5 +19,14 @@ public class ManageGame : MonoBehaviour
         {
             Application.Quit();   
         }
+        if(player1.getLivesLeft() == 0 || player2.getLivesLeft() == 0) 
+        {
+            StartCoroutine("WinCoroutine");
+        }
+    }
+    IEnumerator WinCoroutine() 
+    {
+        yield return new WaitForSeconds(5);
+        Application.Quit();
     }
 }
