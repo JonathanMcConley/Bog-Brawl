@@ -9,6 +9,8 @@ public class Player2Controller : MonoBehaviour
     public Transform punchAttackPoint;
     public Transform kickAttackPoint;
     public Player1Controller opponent;
+    public GameObject[] lives;
+    private int livesLeft;
     public float punchAttackRange;
     public float kickAttackRange;
     private bool isSinking;
@@ -41,6 +43,7 @@ public class Player2Controller : MonoBehaviour
         minSinkingVelocity = -0.1f;
         punchTime = 0.01f;
         kickTime = 0.3325f;
+        livesLeft = lives.Length;
     }
 
     // Update is called once per frame
@@ -50,7 +53,15 @@ public class Player2Controller : MonoBehaviour
         if (gameObject.transform.position.y < yDeathboxMin || gameObject.transform.position.x < xDeathboxMin || gameObject.transform.position.x > -xDeathboxMin || gameObject.transform.position.y > yDeathboxMax)
         {
             rigidBody.velocity = Vector2.zero;
-            gameObject.transform.position = new Vector3(0, 0, -0.01f);
+            livesLeft -= 1;
+            if (livesLeft >= 0)
+            {
+                Destroy(lives[livesLeft]);
+                if (livesLeft > 0)
+                {
+                    gameObject.transform.position = new Vector3(0, 0, -0.01f);
+                }
+            }
         }
         //If the player is sinking, their gravity is 0.001% of Normal Gravity
         if (isSinking)
