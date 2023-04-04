@@ -84,18 +84,18 @@ public class Player2Controller : MonoBehaviour
             animatorController.SetBool("IsJumping", true);
         }
         //Jump with X for P1, and Numpad 8 for P2
-        if (Input.GetKeyDown(KeyCode.Keypad8) && jumps > 0 && !animatorController.GetBool("GotHit"))
+        if (Input.GetKeyDown(KeyCode.Alpha8) && jumps > 0 && !animatorController.GetBool("GotHit"))
         {
             rigidBody.AddForce(Vector2.up * jumpHeight * jumpResistance, ForceMode2D.Impulse);
             jumps -= 1;
         }
         //Light Attack with Spacebar for P1, and Numpad 4 for P2
-        if (Input.GetKeyDown(KeyCode.Keypad4) && !animatorController.GetBool("GotHit"))
+        if (Input.GetKeyDown(KeyCode.Alpha4) && !animatorController.GetBool("GotHit"))
         {
             StartCoroutine("PunchCoroutine");
         }
         //Heavy Attack with V for P1, and Numpad 5 for P2
-        if (Input.GetKeyDown(KeyCode.Keypad5) && !animatorController.GetBool("GotHit"))
+        if (Input.GetKeyDown(KeyCode.Alpha5) && !animatorController.GetBool("GotHit"))
         {
             StartCoroutine("KickCoroutine");
         }
